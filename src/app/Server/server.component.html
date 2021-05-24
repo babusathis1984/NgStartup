@@ -1,3 +1,31 @@
 <h1>Hello am a server comp</h1>
-<p>{{'Servers'}} with server Id {{serverID}} is {{serverStatus}}</p>
-<button class="btn btn-primary" style="cursor:pointer" [disabled]=!allowNewServer>Add Server</button>
+<!-- <p [ngStyle] = '{backgroundColor:getServerStatus()}' 
+*ngIf="serverCreated">{{'Servers'}} with server Id {{serverID}} is {{serverStatus}}</p> -->
+<!-- //p without ngif -->
+<p *ngFor="let server of servers;let i = index" 
+[ngClass] ="{online:serverStatus === 'online'}" 
+[ngStyle] = '{backgroundColor:getServerStatus()}' >
+{{server}} with server Id {{serverID + i}} is {{serverStatus}}</p>
+
+<button 
+class="btn btn-primary" 
+style="cursor:pointer" 
+[disabled]="serverName===''"
+(click)="onServerCreated()"
+>Add Server</button>
+
+<input 
+type="text"
+class="form-control"
+[(ngModel)]="serverName">
+<!-- 
+<input 
+type="text"
+class="form-control"
+(input)="onUpdatedServerName($event)"> -->
+
+
+<!-- <p>{{allowNewServer}}</p>
+<p>{{serverCreatedStatus}}</p> -->
+
+
